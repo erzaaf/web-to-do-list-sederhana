@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taskflow - Management Task Modern</title>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f0f5ff',
+              100: '#e0ebff',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen antialiased flex flex-col selection:bg-brand-500 selection:text-white">
+
+  <!-- Main Container -->
+  <div class="max-w-4xl w-full mx-auto px-4 py-6 md:py-10 flex-1 flex flex-col">
+    
+    <!-- Modular Header Component Root -->
+    <div id="header-root"></div>
+
+    <!-- Modular Statistics Component Root -->
+    <div id="stats-root"></div>
+
+    <!-- Modular Toolbar Component Root -->
+    <div id="toolbar-root"></div>
+
+    <!-- Modular Task List Component Root -->
+    <main id="task-list-root" class="flex-1"></main>
+
+    <!-- Footer -->
+    <footer class="mt-8 text-center text-xs text-slate-400 py-4">
+      <p>&copy; 2026 Taskflow. Minimalist & Modern To-Do List Application.</p>
+    </footer>
+  </div>
+
+  <!-- Modular Task Form Modal Root -->
+  <div id="modal-root"></div>
+
+  <!-- Modular Confirmation Modal Root -->
+  <div id="confirm-root"></div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none max-w-xs w-full"></div>
+
+  <!-- Entry Script (ES Modules) -->
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

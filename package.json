@@ -1,0 +1,23 @@
+{
+  "name": "taskflow-app",
+  "version": "1.0.0",
+  "description": "Modern Minimalist To-Do List Application with REST API backend",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node server/index.js"
+  },
+  "keywords": [
+    "todo-list",
+    "express",
+    "tailwindcss",
+    "javascript"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  }
+}
