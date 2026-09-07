@@ -1,19 +1,19 @@
-const db = require('../config/db');
+const TaskModel = require('../models/taskModel');
 
 // @desc    Get all tasks
 // @route   GET /api/tasks
-exports.getAllTasks = (req, res) => {
+exports.getAllTasks = (req, res, next) => {
   try {
-    const tasks = db.getTasks();
+    const tasks = TaskModel.getAll();
     res.json({ success: true, data: tasks });
   } catch (error) {
-    res.status(500).json({ success: false, message: 'Server error' });
+    next(error);
   }
 };
 
 // @desc    Create new task
 // @route   POST /api/tasks
-exports.createTask = (req, res) => {
+exports.createTask = (req, res, next) => {
   try {
     const { title, category, priority, deadline } = req.body;
 
@@ -21,7 +21,7 @@ exports.createTask = (req, res) => {
       return res.status(400).json({ success: false, message: 'Judul task wajib diisi' });
     }
 
-    const tasks = db.getTasks();
+    const tasks = TaskModel.getAll();
     const newTask = {
       id: Date.now().toString(),
       title: title.trim(),
@@ -33,22 +33,22 @@ exports.createTask = (req, res) => {
     };
 
     tasks.unshift(newTask);
-    db.saveTasks(tasks);
+    TaskModel.save(tasks);
 
     res.status(201).json({ success: true, data: newTask, message: 'Task berhasil ditambahkan' });
   } catch (error) {
-    res.status(500).json({ success: false, message: 'Server error' });
+    next(error);
   }
 };
 
 // @desc    Update task
 // @route   PUT /api/tasks/:id
-exports.updateTask = (req, res) => {
+exports.updateTask = (req, res, next) => {
   try {
     const { id } = req.params;
     const { title, category, priority, deadline, completed } = req.body;
 
-    let tasks = db.getTasks();
+    let tasks = TaskModel.getAll();
     const index = tasks.findIndex(t => t.id === id);
 
     if (index === -1) {
@@ -64,20 +64,20 @@ exports.updateTask = (req, res) => {
       completed: completed !== undefined ? Boolean(completed) : tasks[index].completed
     };
 
-    db.saveTasks(tasks);
+    TaskModel.save(tasks);
 
     res.json({ success: true, data: tasks[index], message: 'Task berhasil diperbarui' });
   } catch (error) {
-    res.status(500).json({ success: false, message: 'Server error' });
+    next(error);
   }
 };
 
-// @desc    Toggle task status (completed / pending)
+// @desc    Toggle task status
 // @route   PATCH /api/tasks/:id/toggle
-exports.toggleTaskStatus = (req, res) => {
+exports.toggleTaskStatus = (req, res, next) => {
   try {
     const { id } = req.params;
-    let tasks = db.getTasks();
+    let tasks = TaskModel.getAll();
     const index = tasks.findIndex(t => t.id === id);
 
     if (index === -1) {
@@ -85,20 +85,20 @@ exports.toggleTaskStatus = (req, res) => {
     }
 
     tasks[index].completed = !tasks[index].completed;
-    db.saveTasks(tasks);
+    TaskModel.save(tasks);
 
     res.json({ success: true, data: tasks[index], message: 'Status task berhasil diubah' });
   } catch (error) {
-    res.status(500).json({ success: false, message: 'Server error' });
+    next(error);
   }
 };
 
 // @desc    Delete single task
 // @route   DELETE /api/tasks/:id
-exports.deleteTask = (req, res) => {
+exports.deleteTask = (req, res, next) => {
   try {
     const { id } = req.params;
-    let tasks = db.getTasks();
+    let tasks = TaskModel.getAll();
     const exists = tasks.some(t => t.id === id);
 
     if (!exists) {
@@ -106,23 +106,23 @@ exports.deleteTask = (req, res) => {
     }
 
     tasks = tasks.filter(t => t.id !== id);
-    db.saveTasks(tasks);
+    TaskModel.save(tasks);
 
     res.json({ success: true, message: 'Task berhasil dihapus' });
   } catch (error) {
-    res.status(500).json({ success: false, message: 'Server error' });
+    next(error);
   }
 };
 
-// @desc    Delete all completed tasks
+// @desc    Clear all completed tasks
 // @route   DELETE /api/tasks/completed/clear
-exports.clearCompleted = (req, res) => {
+exports.clearCompleted = (req, res, next) => {
   try {
-    let tasks = db.getTasks();
+    let tasks = TaskModel.getAll();
     const initialCount = tasks.length;
     tasks = tasks.filter(t => !t.completed);
 
-    db.saveTasks(tasks);
+    TaskModel.save(tasks);
 
     res.json({ 
       success: true, 
@@ -130,6 +130,6 @@ exports.clearCompleted = (req, res) => {
       deletedCount: initialCount - tasks.length
     });
   } catch (error) {
-    res.status(500).json({ success: false, message: 'Server error' });
+    next(error);
   }
 };

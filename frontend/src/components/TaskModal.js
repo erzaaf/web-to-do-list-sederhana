@@ -1,5 +1,5 @@
 /**
- * TaskModal Component (Add & Edit Task Modal)
+ * TaskModal Component
  */
 
 export function renderTaskModal(containerId, callbacks) {

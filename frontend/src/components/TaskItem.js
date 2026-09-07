@@ -1,5 +1,5 @@
 /**
- * TaskItem Component - Single Task Card Renderer
+ * TaskItem Component
  */
 
 export function renderTaskItem(task) {
@@ -15,7 +15,6 @@ export function renderTaskItem(task) {
     low: 'Rendah'
   }[task.priority] || 'Sedang';
 
-  // Deadline Formatting
   let deadlineBadge = '';
   if (task.deadline) {
     const todayStr = new Date().toISOString().split('T')[0];
@@ -35,7 +34,6 @@ export function renderTaskItem(task) {
     `;
   }
 
-  // Category Tag
   const categoryTag = task.category ? `
     <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium bg-brand-50 text-brand-600 border border-brand-100">
       <i data-lucide="tag" class="w-3 h-3"></i>

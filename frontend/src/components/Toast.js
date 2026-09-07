@@ -28,7 +28,7 @@ export const Toast = {
   },
 
   escapeHtml(str) {
-    return String(str).replace(/[&<>"']/g, (m) => ({
+    return String(str || '').replace(/[&<>"']/g, (m) => ({
       '&': '&amp;',
       '<': '&lt;',
       '>': '&gt;',

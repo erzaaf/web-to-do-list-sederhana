@@ -1,16 +1,15 @@
 {
-  "name": "taskflow-app",
+  "name": "to-do-list",
   "version": "1.0.0",
-  "description": "Modern Minimalist To-Do List Application with REST API backend",
-  "main": "server/index.js",
+  "description": "Fullstack To-Do List Application",
+  "main": "backend/src/index.js",
   "scripts": {
-    "start": "node server/index.js",
-    "dev": "node server/index.js"
+    "start": "node backend/src/index.js",
+    "dev": "node backend/src/index.js"
   },
   "keywords": [
     "todo-list",
     "express",
-    "tailwindcss",
     "javascript"
   ],
   "author": "",

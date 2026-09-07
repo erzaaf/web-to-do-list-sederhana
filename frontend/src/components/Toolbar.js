@@ -1,5 +1,5 @@
 /**
- * Toolbar Component (Search, Sort, Filter & Clear Completed)
+ * Toolbar Component
  */
 
 export function renderToolbar(containerId, state, callbacks) {
@@ -66,7 +66,6 @@ export function renderToolbar(containerId, state, callbacks) {
     </div>
   `;
 
-  // Attach Listeners
   const searchInput = document.getElementById('search-input');
   const clearSearchBtn = document.getElementById('clear-search-btn');
   const sortSelect = document.getElementById('sort-select');

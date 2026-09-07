@@ -4,12 +4,12 @@ const path = require('path');
 const dataDir = path.join(__dirname, '..', 'data');
 const dbFile = path.join(dataDir, 'tasks.json');
 
-// Ensure directory exists
+// Ensure data directory exists
 if (!fs.existsSync(dataDir)) {
   fs.mkdirSync(dataDir, { recursive: true });
 }
 
-// Initial mock data if database file doesn't exist
+// Initialize seed data if file doesn't exist
 if (!fs.existsSync(dbFile)) {
   const initialTasks = [
     {
@@ -34,27 +34,26 @@ if (!fs.existsSync(dbFile)) {
   fs.writeFileSync(dbFile, JSON.stringify(initialTasks, null, 2), 'utf-8');
 }
 
-function getTasks() {
-  try {
-    const data = fs.readFileSync(dbFile, 'utf-8');
-    return JSON.parse(data);
-  } catch (err) {
-    console.error('Gagal membaca database:', err);
-    return [];
+class TaskModel {
+  static getAll() {
+    try {
+      const data = fs.readFileSync(dbFile, 'utf-8');
+      return JSON.parse(data);
+    } catch (err) {
+      console.error('Error reading database:', err);
+      return [];
+    }
+  }
+
+  static save(tasks) {
+    try {
+      fs.writeFileSync(dbFile, JSON.stringify(tasks, null, 2), 'utf-8');
+      return true;
+    } catch (err) {
+      console.error('Error writing to database:', err);
+      return false;
+    }
   }
 }
 
-function saveTasks(tasks) {
-  try {
-    fs.writeFileSync(dbFile, JSON.stringify(tasks, null, 2), 'utf-8');
-    return true;
-  } catch (err) {
-    console.error('Gagal menyimpan ke database:', err);
-    return false;
-  }
-}
-
-module.exports = {
-  getTasks,
-  saveTasks
-};
+module.exports = TaskModel;

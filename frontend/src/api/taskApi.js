@@ -1,10 +1,10 @@
 /**
- * API Service for Backend Endpoint Communication
+ * Task API Client Service
  */
 
 const API_BASE_URL = '/api/tasks';
 
-export const TaskAPI = {
+export const taskApi = {
   async getAllTasks() {
     try {
       const response = await fetch(API_BASE_URL);
@@ -12,7 +12,7 @@ export const TaskAPI = {
       if (!result.success) throw new Error(result.message);
       return result.data;
     } catch (err) {
-      console.warn('Backend API tidak terjangkau, menggunakan data lokal:', err.message);
+      console.warn('Backend API offline, falling back to LocalStorage:', err.message);
       const local = localStorage.getItem('taskflow_tasks');
       return local ? JSON.parse(local) : [];
     }
@@ -29,7 +29,7 @@ export const TaskAPI = {
       if (!result.success) throw new Error(result.message);
       return result.data;
     } catch (err) {
-      console.warn('API Error, menyimpan di LocalStorage:', err);
+      console.warn('API Error, saving to LocalStorage:', err);
       const tasks = JSON.parse(localStorage.getItem('taskflow_tasks') || '[]');
       const newTask = {
         id: Date.now().toString(),
@@ -54,7 +54,7 @@ export const TaskAPI = {
       if (!result.success) throw new Error(result.message);
       return result.data;
     } catch (err) {
-      console.warn('API Error, update LocalStorage:', err);
+      console.warn('API Error, updating LocalStorage:', err);
       let tasks = JSON.parse(localStorage.getItem('taskflow_tasks') || '[]');
       tasks = tasks.map(t => t.id === id ? { ...t, ...taskData } : t);
       localStorage.setItem('taskflow_tasks', JSON.stringify(tasks));
@@ -71,7 +71,7 @@ export const TaskAPI = {
       if (!result.success) throw new Error(result.message);
       return result.data;
     } catch (err) {
-      console.warn('API Error, toggle LocalStorage:', err);
+      console.warn('API Error, toggling LocalStorage:', err);
       let tasks = JSON.parse(localStorage.getItem('taskflow_tasks') || '[]');
       let updated;
       tasks = tasks.map(t => {
@@ -95,7 +95,7 @@ export const TaskAPI = {
       if (!result.success) throw new Error(result.message);
       return true;
     } catch (err) {
-      console.warn('API Error, delete LocalStorage:', err);
+      console.warn('API Error, deleting from LocalStorage:', err);
       let tasks = JSON.parse(localStorage.getItem('taskflow_tasks') || '[]');
       tasks = tasks.filter(t => t.id !== id);
       localStorage.setItem('taskflow_tasks', JSON.stringify(tasks));
@@ -112,7 +112,7 @@ export const TaskAPI = {
       if (!result.success) throw new Error(result.message);
       return true;
     } catch (err) {
-      console.warn('API Error, clear LocalStorage:', err);
+      console.warn('API Error, clearing LocalStorage:', err);
       let tasks = JSON.parse(localStorage.getItem('taskflow_tasks') || '[]');
       tasks = tasks.filter(t => !t.completed);
       localStorage.setItem('taskflow_tasks', JSON.stringify(tasks));

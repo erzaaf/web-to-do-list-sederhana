@@ -1,5 +1,5 @@
 /**
- * TaskList & Empty State Component
+ * TaskList Component
  */
 
 import { renderTaskItem } from './TaskItem.js';
@@ -43,7 +43,6 @@ export function renderTaskList(containerId, filteredTasks, totalTasksCount, call
     </ul>
   `;
 
-  // Attach Delegated Event Listeners for toggle, edit, delete
   container.querySelectorAll('[data-action]').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.stopPropagation();

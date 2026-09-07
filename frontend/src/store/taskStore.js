@@ -1,8 +1,8 @@
 /**
- * Central State Store & Event Publisher
+ * Task Store - Reactive Application State
  */
 
-class Store {
+class TaskStore {
   constructor() {
     this.state = {
       tasks: [],
@@ -73,4 +73,4 @@ class Store {
   }
 }
 
-export const store = new Store();
+export const taskStore = new TaskStore();

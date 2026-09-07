@@ -1,5 +1,5 @@
 /**
- * ConfirmModal Component (Delete & Clear Confirmation Modal)
+ * ConfirmModal Component
  */
 
 let onConfirmCallback = null;
