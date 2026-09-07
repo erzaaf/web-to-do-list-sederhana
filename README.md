@@ -23,60 +23,6 @@ Taskflow adalah aplikasi manajemen tugas (To-Do List) modern, minimalis, dan res
 
 ---
 
-## 📁 Struktur Project
-
-```text
-to-do-list/
-├── frontend/
-│   ├── public/
-│   │   ├── css/
-│   │   │   └── style.css       # Custom CSS & animasi toast/modal
-│   │   └── index.html          # HTML Shell utama
-│   ├── src/
-│   │   ├── api/
-│   │   │   └── taskApi.js      # Service Fetcher API Backend
-│   │   ├── components/         # Komponen UI Terpisah (Modular)
-│   │   │   ├── Header.js
-│   │   │   ├── Stats.js
-│   │   │   ├── Toolbar.js
-│   │   │   ├── TaskItem.js
-│   │   │   ├── TaskList.js
-│   │   │   ├── TaskModal.js
-│   │   │   ├── ConfirmModal.js
-│   │   │   └── Toast.js
-│   │   ├── store/
-│   │   │   └── taskStore.js    # State Management (Pub/Sub Store)
-│   │   └── main.js             # Frontend App Orchestrator
-│   ├── package.json
-│   └── .env                    # Environment Variable Frontend
-├── backend/
-│   ├── src/
-│   │   └── index.js            # Express Web Server entrypoint
-│   ├── routes/
-│   │   └── taskRoutes.js       # Router Endpoint REST API
-│   ├── controllers/
-│   │   └── taskController.js   # Controller Logic CRUD
-│   ├── models/
-│   │   └── taskModel.js        # Model Data / Storage Access
-│   ├── middleware/
-│   │   └── errorHandler.js    # Global Middleware Error Handling
-│   ├── .env                    # Environment Variable Backend
-│   └── package.json
-├── database/
-│   ├── migrations/
-│   │   └── 001_create_tasks_table.sql # Script pembuatan tabel SQL
-│   ├── seeds/
-│   │   └── 001_seed_tasks.sql         # Data sampel awal
-│   ├── schema.sql                     # Skema SQL Lengkap
-│   └── README.md                      # Dokumentasi Skema Database
-├── docs/
-│   └── README.md                      # Dokumentasi Spesifikasi API REST
-├── .gitignore
-└── README.md
-```
-
----
-
 ## 🛠️ Panduan Instalasi & Jalankan Lokal
 
 ### Prerequisites
@@ -166,8 +112,3 @@ Jika ingin menggunakan domain khusus seperti `http://todolist.local:5000`:
    - **Start Command:** `npm start`
 5. Klik **Create Web Service**.
 
----
-
-## 📄 Lisensi
-
-Project ini dilindungi di bawah lisensi [MIT License](LICENSE).
